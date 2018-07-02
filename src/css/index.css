@@ -1,0 +1,150 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Playfair Display', serif;
+  color: rgba(139,69,19, 0.7);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(139,69,19, 0.7);
+    width: 5px;
+    border: 5px solid rga(0,0,0,0);
+    overflow: visible;
+}
+::-webkit-scrollbar {
+    width: 10px;
+    overflow: visible;
+}
+::-webkit-scrollbar-track{
+  width: 15px;
+  background: rgba(139,69,19, 0.5);
+  background-clip: content-box;
+
+}
+
+
+
+
+
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.allBody{
+
+height: 100%;
+width: 100%;
+}
+
+.allMovies{
+
+}
+
+.movies{
+  margin-top: 20px;
+  height: 90vh;
+  padding-left: 0.2%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto auto auto;
+
+}
+
+.titleBackground{
+  width: 99%;
+  position: sticky;
+  top:0px;
+  background-color: white;
+
+}
+
+.title{
+
+  margin-top:1%;
+  padding-bottom: 10px;
+  width: 95%;
+  text-align: center;
+
+}
+
+
+.name{
+  color: rgba(139,69,19, 1);
+  text-align: center;
+  margin: 2px;
+  font-size: 30px;
+
+}
+
+.call{
+  font-size: 18px;
+  margin-top: -25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 5%;
+}
+
+.email{
+
+  display: flex;
+  flex-direction: row;
+  width: 15%;
+  justify-content: space-between;
+
+}
+
+.addres{
+    text-decoration: underline;
+}
+
+.movie{
+    width: 80%;
+    margin:auto;
+
+}
+.movie div:nth-child(2){
+  height: 10px;
+}
+
+.movie img{
+  height: 100%;
+  width: 100%;
+  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
+}
+
+.touched {
+
+}
+
+.movieName{
+  text-align: center;
+  animation-name: movieUP;
+  animation-duration: 0.2s;
+  height: 16px;
+
+  position: relative;
+  animation-fill-mode: forwards;
+  overflow: visible;
+}
+
+.movieHide{
+  color:white;
+  position: relative;
+    top: 5px;
+    height: 16px;
+    width:395.67px;
+    text-align: center;
+}
+
+@keyframes movieUP {
+  from {opacity: 0; top: 20px;}
+  to { opacity: 1; top: -5px; }
+
+}
