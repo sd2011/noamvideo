@@ -4,21 +4,12 @@ import './functions/index';
 
 const Index = (props) => {
     return(
-      <div className="App">
-        <div className="titleBackground">
-          <div className="title">
-            <div className="name">
-              Noam Ofer
-            </div>
-            <div className="editor">
-              video editor bla bla bla bla bla bla bla
-            </div>
-          </div>
-        </div>
+      <div>
         <div className="allBody">
           <div className="allMovies">
-            <div className="movies">{props.movies}</div>
-            <div className="movies">{props.movies}</div>
+            <div className="column" key="1">{props.movies0}{props.movies1}</div>
+            <div className="column" key="2">{props.movies1}{props.movies0}</div>
+            <div className="column" key="3">{props.movies0}{props.movies1}</div>
           </div>
           <div className="call">
             <div className="email">

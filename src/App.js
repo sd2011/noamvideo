@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './css/index.css';
-import _ from 'lodash';
 import Index from './components/index/index';
+import Video from './components/video';
 
 function importAll(r){
   let images = {};
@@ -12,6 +12,7 @@ function importAll(r){
 const images = importAll(require.context('./pics', false, /\.png$/));
 const gifs = importAll(require.context('./gifs', false, /\.gif$/));
 
+
 class App extends Component {
   constructor(props){
     super(props);
@@ -21,39 +22,70 @@ class App extends Component {
       currentMovie:"",
       onMovie:{},
     }
+    this.handleScroll = this.handleScroll.bind(this);
   }
 
-  renderMovies(){
-    console.log(this.state.onMovie);
-    const movies = _.map(images, (img, i) =>{const movie = i.replace('.png',''); return (
-      <div>
-        {this.state.onMovie[movie] ?
-        (<div className="movieName"> {movie} </div>)
-        :
-        (<div className="movieHide"/>)}
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
+}
+
+componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+}
+
+handleScroll(){
+  !this.state.scroll && this.setState({scroll: {padding: '0px', margin: '0px'}});
+}
+
+
+  renderMovies(num){
+    const currentImages = Object.values(images).slice(num, num + 3);
+    const names = Object.keys(images).slice(num, num + 3);
+    const movies = currentImages.map((img, i) =>{
+      const movie = names[i].replace('.png','');
+      return (
+        !this.state.onMovie[movie] ? (
         <div className="movie"
-         onClick={(e) => this.setState({movie:true,currentMovie:e.target.src})}
-         onMouseOver={(e) => this.setState({onMovie:{[movie]: true}})}
-         onMouseOut={(e) => this.setState({onMovie:{}})}
-         key={i}
-        >
-          <img src={!this.state.onMovie[movie] ? img : gifs[movie + ".gif"]} alt="video" />
+        onMouseOver={(e) => this.setState({onMovie:{[movie]: true}})}
+        key={i}>
+            <img src={ img } alt="video" />
         </div>
-      </div>
-    )})
+        )
+        :
+        (
+        <div className="movie gif"
+        onClick={(e) => this.setState({ movie:true,currentMovie: movie })}
+        onMouseOut={(e) => this.setState({onMovie:{}})}
+        key={i}>
+          <div className="movieName"> {movie} </div>
+          <img src={gifs[movie + ".gif"]}  alt="video" />
+        </div>
+        )
+      )})
     return movies;
   }
 
   render() {
-    const { movie, currentMovie } = this.state
-    return !movie ?
-    <Index movies={this.renderMovies()} />
-    :
-      (<div>
-
-        <div className="showMovie"><img src={currentMovie} alt="video" /></div>
-      </div>
-    );
+    const { movie, currentMovie, scroll } = this.state;
+     return !movie ? (
+      <div className="App">
+        <div className="titleBackground">
+          <div className="title" style={scroll && scroll}>
+            <div className="name">
+              Noam Ofer
+            </div>
+              <div className="editor">
+                video editor bla bla bla bla bla bla bla
+              </div>
+          </div>
+        </div>
+         <Index movies0={this.renderMovies(0)} movies1={this.renderMovies(3)} />
+        </div>
+       )
+      :
+      (
+        <Video exit={() => this.setState({movie:false})} movie={currentMovie} />
+      )
   }
 }
 

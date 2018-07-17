@@ -3,17 +3,18 @@ body, html {
   padding: 0;
   font-family: 'Playfair Display', serif;
   color: rgba(139,69,19, 0.7);
+
 }
 
 ::-webkit-scrollbar-thumb {
     background-color: rgba(139,69,19, 0.7);
     width: 5px;
     border: 5px solid rga(0,0,0,0);
-    overflow: visible;
+
 }
 ::-webkit-scrollbar {
     width: 10px;
-    overflow: visible;
+
 }
 ::-webkit-scrollbar-track{
   width: 15px;
@@ -22,51 +23,57 @@ body, html {
 
 }
 
-
-
-
-
-.App {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-
-.allBody{
-
-height: 100%;
-width: 100%;
-}
-
-.allMovies{
-
-}
-
-.movies{
-  margin-top: 20px;
-  height: 90vh;
-  padding-left: 0.2%;
-  width: 100%;
-  display: grid;
-  grid-template-columns: auto auto auto;
-
-}
-
-.titleBackground{
-  width: 99%;
+.sticky{
   position: sticky;
   top:0px;
-  background-color: white;
+}
 
+
+
+.column{
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+
+
+}
+
+.App {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-left: 30px solid rgba(155, 89, 182,1.0);
+  border-right: 30px solid rgba(155, 89, 182,1.0);
+
+}
+
+
+.allMovies{
+  display: flex;
+  width: 90%;
+  height: auto;
+  flex-direction: row;
+  margin: auto;
+  justify-content: space-between;
+
+
+
+}
+
+
+.titleBackground{
+  width: 100%;
+  background-color: white;
+  position: sticky;
+  top:0px;
+  z-index: 2000;
 }
 
 .title{
 
   margin-top:1%;
   padding-bottom: 10px;
-  width: 95%;
+  width: 100%;
   text-align: center;
 
 }
@@ -81,14 +88,14 @@ width: 100%;
 }
 
 .call{
+  margin-top: 30px;
   font-size: 18px;
-  margin-top: -25px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
   width: 100%;
   height: 5%;
+  padding-bottom: 10px;
 }
 
 .email{
@@ -105,43 +112,95 @@ width: 100%;
 }
 
 .movie{
-    width: 80%;
-    margin:auto;
-
+    width: 100%;
+    margin: 3px;
 }
 
 .movie img{
-  height: 100%;
-  width: 100%;
-  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
+  display: block;
+  width:100%;
 }
 
-.touched {
+.gif{
+  cursor: pointer;
+  position: relative;
 
 }
 
 .movieName{
-  text-align: center;
-  animation-name: movieUP;
-  animation-duration: 0.2s;
-  height: 16px;
-
-  position: relative;
-  animation-fill-mode: forwards;
-  overflow: visible;
+  display: flex;
+  position: absolute;
+  z-index: 1000;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.3);
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: white;
 }
 
 .movieHide{
   color:white;
   position: relative;
     top: 5px;
-    height: 16px;
-    width:395.67px;
+
+    width:100%;
     text-align: center;
 }
 
-@keyframes movieUP {
-  from {opacity: 0; top: 20px;}
-  to { opacity: 1; top: -5px; }
+.showMovie{
+  display: flex;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  background-color: rgba(0,0,0,0.9);
+  overflow:hidden;
+  top:0px;
+
+}
+
+.showMovie video{
+  margin:auto;
+}
+
+.exit{
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  display: flex;
+  justify-content: center;
+  height: 25px;
+  cursor: pointer;
+  width: 23px;
+}
+
+
+.lineA{
+  margin: auto;
+  height: 0px;
+  width: 20px;
+  border-bottom: 1px solid lightgray;
+  transform: rotate(45deg);
+}
+
+.exit:hover > .lineA , .exit:hover .lineB {
+  border-bottom: 2px solid white;
+}
+
+.lineB{
+  height: 0px;
+    width: 20px;
+  position: relative;
+
+  border-bottom: 1px solid lightgray;
+  transform: rotate(-90deg);
+}
+
+
+@keyframes titleUP {
+  from {z-index:  1000; opacity: 1;}
+  to { z-index: 0 ; opacity: 0;}
 
 }
