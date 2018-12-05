@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './css/index.css';
+import './css/app.css';
 import Index from './components/index/index';
-import Video from './components/video';
+import Video from './components/video/video';
 
 function importAll(r){
   let images = {};
@@ -21,71 +21,112 @@ class App extends Component {
       movie: false,
       currentMovie:"",
       onMovie:{},
+      scroll:0,
+      width: 10000,
     }
+    this.onMobile= ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) ? true : false;
     this.handleScroll = this.handleScroll.bind(this);
+    this.updateSize = this.updateSize.bind(this);
+    this.clicked = false;
   }
 
+
   componentDidMount() {
+    fetch("/videos")
+    .then(res => res.json())
+    .then(vimeo => this.setState({vimeo}));
     window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener('resize', this.updateSize)
 }
+
+
 
 componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener('resize', this.updateSize);
+    document.body.style.overflowY = null;
 }
 
 handleScroll(){
-  !this.state.scroll && this.setState({scroll: {padding: '0px', margin: '0px'}});
+
+  this.state.scroll !==1 && (window.scrollY > 35 && (this.setState({scroll:1 , title: "titleScroll", name: "nameScroll"})));
+  this.state.scroll !==2 && (window.scrollY < 6 && (this.setState({scroll: 2, title: "titleScrollUp", name: "nameScrollUp"})));
+}
+
+updateSize(){
+  this.setState({width: window.innerWidth});
 }
 
 
-  renderMovies(num){
-    const currentImages = Object.values(images).slice(num, num + 3);
-    const names = Object.keys(images).slice(num, num + 3);
-    const movies = currentImages.map((img, i) =>{
-      const movie = names[i].replace('.png','');
+  renderMovies(start, finish){
+    const amount = (i) => {if( i >= start && i < finish){return true}}
+    const currentVimeo = this.state.vimeo.filter((video, i) => images[video.uri.replace("/videos/",'') + '.png'] && amount(i));
+    const movies = currentVimeo.map((video, i ) =>{
       return (
-        !this.state.onMovie[movie] ? (
+        !this.state.onMovie[video.name] ? (
         <div className="movie"
-        onMouseOver={(e) => this.setState({onMovie:{[movie]: true}})}
-        key={i}>
-            <img src={ img } alt="video" />
+        onMouseEnter={() => this.setState({onMovie:{[video.name]: true}})}
+        key={video.name}>
+            {this.onMobile && (<div className="movieTitle">{video.name}</div>)}
+          <img src={ images[video.uri.replace("/videos/",'') + '.png']} alt="video" />
         </div>
         )
         :
         (
         <div className="movie gif"
-        onClick={(e) => this.setState({ movie:true,currentMovie: movie })}
-        onMouseOut={(e) => this.setState({onMovie:{}})}
-        key={i}>
-          <div className="movieName"> {movie} </div>
-          <img src={gifs[movie + ".gif"]}  alt="video" />
+        onClick={() => {this.clicked = true;this.setState({ movie:true,currentMovie: video})}}
+        onMouseLeave={() => this.setState({onMovie:{}})}
+        key={video.name}>
+          <div className="movieName"> {video.name} </div>
+          <img src={gifs[video.uri.replace("/videos/",'')+ ".gif"]}  alt="video" />
         </div>
         )
       )})
     return movies;
   }
 
-  render() {
-    const { movie, currentMovie, scroll } = this.state;
-     return !movie ? (
-      <div className="App">
-        <div className="titleBackground">
-          <div className="title" style={scroll && scroll}>
-            <div className="name">
-              Noam Ofer
-            </div>
-              <div className="editor">
-                video editor bla bla bla bla bla bla bla
-              </div>
+  renderTitle(show){
+    const {  scroll, title, name } = this.state;
+    return(
+      <div className={show ?"titleBackground" : null}>
+        <div className={show ? (scroll === 0 ? "title" : title) : "title"} >
+          <div className={show ? (scroll === 0 ? "name" : name) : "name"} >
+            Noam Ofer
           </div>
+            <div className="editor">
+              video editor bla bla bla bla bla bla bla
+            </div>
         </div>
-         <Index movies0={this.renderMovies(0)} movies1={this.renderMovies(3)} />
+      </div>
+    )
+  }
+
+  render() {
+    const { movie, currentMovie, transform ,vimeo,width } = this.state;
+    if( !vimeo){return <div />}
+    document.body.style.overflowY = this.state.movie ? "hidden" : "scroll";
+     return (
+       <div className="all">
+        {movie && (  <Video exit={() => this.setState({movie:false})} movie={currentMovie} transform={transform} clicked={this.clicked} />)}
+        <div className="App" >
+          {this.renderTitle(true)}
+          <div className="scrollHeight">
+            {this.renderTitle(false)}
+          </div>
+          <Index
+           movies0={this.renderMovies(0,vimeo.length / 4 * 3 )}
+           movies1={this.renderMovies(vimeo.length / 4 * 3 , vimeo.length / 4 * 3.5)}
+           movies2={this.renderMovies(vimeo.length / 4 * 3.5 , vimeo.length)}
+           onMobile={this.onMobile}
+           size={width} />
+          <footer className="call">
+            <div className="email">
+              <div>email: </div><a href='mailto: stom96@gmail.com'>   noamofer@gmail.com</a>
+            </div>
+          </footer>
+        </div>
         </div>
        )
-      :
-      (
-        <Video exit={() => this.setState({movie:false})} movie={currentMovie} />
-      )
   }
 }
 

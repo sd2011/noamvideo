@@ -1,0 +1,150 @@
+
+
+
+.resp-sharing-button--twitter {
+  fill: #55acee
+}
+
+.resp-sharing-button--twitter:hover {
+  fill: #2795e9
+}
+
+.resp-sharing-button--pinterest {
+  fill: #bd081c
+}
+
+.resp-sharing-button--pinterest:hover {
+  fill: #8c0615
+}
+
+.resp-sharing-button--facebook {
+  fill: #3b5998
+}
+
+.resp-sharing-button--facebook:hover {
+  fill: #2d4373
+}
+
+.resp-sharing-button--tumblr {
+  fill: #35465C
+}
+
+.resp-sharing-button--tumblr:hover {
+  fill: #222d3c
+}
+
+.resp-sharing-button--reddit {
+  fill: #5f99cf
+}
+
+.resp-sharing-button--reddit:hover {
+  fill: #3a80c1
+}
+
+.resp-sharing-button--google {
+  fill: #dd4b39
+}
+
+.resp-sharing-button--google:hover {
+  fill: #c23321
+}
+
+.resp-sharing-button--linkedin {
+  fill: #0077b5
+}
+
+.resp-sharing-button--linkedin:hover {
+  fill: #046293
+}
+
+.resp-sharing-button--email {
+  fill: #777
+}
+
+.resp-sharing-button--email:hover {
+  fill: #5e5e5e
+}
+
+.resp-sharing-button--xing {
+  fill: #1a7576
+}
+
+.resp-sharing-button--xing:hover {
+  fill: #114c4c
+}
+
+.resp-sharing-button--whatsapp {
+  fill: #25D366
+}
+
+.resp-sharing-button--whatsapp:hover {
+  fill: #1da851
+}
+
+.resp-sharing-button--hackernews {
+fill: #FF6600
+}
+.resp-sharing-button--hackernews:hover, .resp-sharing-button--hackernews:focus {   fill: #FB6200 }
+
+.resp-sharing-button--vk {
+  fill: #507299
+}
+
+.resp-sharing-button--vk:hover {
+  fill: #43648c
+}
+
+.resp-sharing-button--facebook {
+  fill: #3b5998;
+  border-color: #3b5998;
+}
+
+.resp-sharing-button--facebook:hover,
+.resp-sharing-button--facebook:active {
+  fill: #2d4373;
+  border-color: #2d4373;
+}
+
+.resp-sharing-button--twitter {
+  fill: #55acee;
+  border-color: #55acee;
+}
+
+.resp-sharing-button--twitter:hover,
+.resp-sharing-button--twitter:active {
+  fill: #2795e9;
+  border-color: #2795e9;
+}
+
+.resp-sharing-button--google {
+  fill: #dd4b39;
+  border-color: #dd4b39;
+}
+
+.resp-sharing-button--google:hover,
+.resp-sharing-button--google:active {
+  fill: #c23321;
+}
+
+
+.resp-sharing-button--pinterest {
+  fill: #bd081c;
+  border-color: #bd081c;
+}
+
+.resp-sharing-button--pinterest:hover,
+.resp-sharing-button--pinterest:active {
+  fill: #8c0615;
+  border-color: #8c0615;
+}
+
+.resp-sharing-button--whatsapp {
+  fill: #25D366;
+  border-color: #25D366;
+}
+
+.resp-sharing-button--whatsapp:hover,
+.resp-sharing-button--whatsapp:active {
+  fill: #1DA851;
+  border-color: #1DA851;
+}

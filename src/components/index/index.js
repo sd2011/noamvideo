@@ -1,23 +1,17 @@
 import React from 'react';
 import '../../css/index.css';
-import './functions/index';
+import _ from 'lodash';
 
 const Index = (props) => {
+  const { onMobile , movies0 ,movies1, movies2 , size } = props;
+  const column = onMobile ? "noColumn" : "column"
+
     return(
-      <div>
-        <div className="allBody">
           <div className="allMovies">
-            <div className="column" key="1">{props.movies0}{props.movies1}</div>
-            <div className="column" key="2">{props.movies1}{props.movies0}</div>
-            <div className="column" key="3">{props.movies0}{props.movies1}</div>
+            <div className={column} width={size < 700 ? "50%" : '33%'} key="1">{movies0}{size < 700 && (_.filter(movies1,(movie, key, obj) => key > obj.length / 2))}</div>
+            {size > 700 && (<div className={column} width="33%" key="2">{movies1}</div>)}
+            <div className={column} width={size < 700 ? "50%" : '33%'} key="3">{movies2}{size < 700 && (_.filter(movies1,(movie, key, obj) => key < obj.length / 2))}</div>
           </div>
-          <div className="call">
-            <div className="email">
-              <div>email: </div><div className="addres">   noamofer@gmail.com</div>
-            </div>
-          </div>
-        </div>
-      </div>
     );
 }
 

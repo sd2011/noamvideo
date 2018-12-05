@@ -1,0 +1,169 @@
+@media screen and (min-width: 800px) {
+
+  .showMovie{
+    display: flex;
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.5);
+    top:0px;
+    z-index: 4000;
+  }
+}
+
+@media screen and (max-width: 800px) {
+
+  .showMovie{
+    display: flex;
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    justify-content: center;
+    background-color: rgba(0,0,0,1);
+    top:0px;
+    z-index: 4000;
+  }
+}
+.showMovie video{
+  margin:auto;
+}
+
+.hidden{
+  cursor: none;
+}
+
+.options{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width:100%;
+  opacity: 1;
+  transition: 0.3s;
+  align-self: flex-end;
+}
+
+
+ .back{
+   opacity: 0;
+   pointer-events: none;
+   cursor: default;
+}
+
+.for{
+  animation-name: options;
+  animation-duration: 0.3s;
+}
+
+.exit{
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+}
+
+.line{
+
+  height: 2px;
+  background-color: lightgray;
+  width: 100%;
+  overflow:visible;
+}
+
+.exit:hover .line {
+  background-color: white;
+}
+
+.share{
+  display: flex;
+  flex-direction: row-reverse;
+  align-items:center;
+  height: 70%;
+  width: 20px;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.shareRight{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 75%;
+  width: 5px;
+}
+
+.shareMiddle{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 34%;
+  overflow: visible;
+  width: 10px;
+  margin-left: -2px;
+  margin-right: -2px;
+}
+
+.shareLeft{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+ width: 5px;
+}
+
+.circle{
+  background-color: lightgray;
+  border-radius: 100%;
+  width: 5px;
+  height: 5px;
+
+}
+
+.share:hover .circle, .share:hover .line{
+  background-color: white;
+}
+
+
+@keyframes options {
+  from {opacity: 0;}
+  to   { opacity: 1;}
+
+}
+
+.opAnDrop{
+  position: absolute;
+  right: 2%;
+  top: 2%;
+  display: flex;
+  flex-direction:row;
+  height: 5%;
+  width: 1.5%;
+  min-width: 20px;
+  justify-content: space-around;
+}
+
+.shareDrop{
+  display: flex;
+  justify-content: space-between;
+  height: 80%;
+  align-items: center;
+  transition: 0.3s;
+}
+
+.shareDrop a{
+width: 8%;
+transition-delay:0.3;
+}
+
+.movieNow{
+  width: 70%;
+
+
+}
+iframe{
+  width: 100%;
+  height: 100%;
+}

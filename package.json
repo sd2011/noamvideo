@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "cd ../ && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "stav",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^3.6.1",
+    "express": "^4.16.3",
+    "vimeo": "^2.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.3"
+  }
+}
